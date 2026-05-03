@@ -1,0 +1,14 @@
+# Environment variables with secrets
+.env
+*.env
+
+# Python compiled files
+*.pyc
+__pycache__/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# OS generated files
+.DS_Store
+Thumbs.db
