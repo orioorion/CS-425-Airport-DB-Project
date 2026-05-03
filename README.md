@@ -27,4 +27,4 @@ To start the program, run the following command:
 ### 5. Using the Application
 Follow the instructions on the terminal
 
-#ENJOY!
+# ENJOY!
