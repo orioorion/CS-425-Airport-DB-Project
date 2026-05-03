@@ -9,22 +9,28 @@
 2. Run the `schema.sql` script to create tables.
 3. Run `data.sql` to fill out initial data.
 
-### 2. Env File Creation
-1. Clone the repository.
-2. Open Command Prompt and run the following command:
+### 2. Start Application Setup
+1. Clone the repository
+2. Locate the repository file and copy the file path
+3. Open command prompt and run the following command:
+   `cd path\to\your\folder`
+
+### 3. Env File Creation
+1. If you already have a .env file, move to step 4, otherwise continue below
+2. Run the following command:
    `python setup.py`
-3. Fill in the database name, password, and port for your database (Only do so if you do not have a .env file created already)
+3. Fill in the database name, password, and port for your database
 
-### 3. Install necessary libraries:
-1. Open Command Prompt if not there already
-2. Run the command:
+### 4. Install necessary libraries:
+1. Run the command:
    `pip install -r requirements.txt`
+2. This will install all necessary external dependencies
 
-### 4. Running the App
+### 5. Running the App
 To start the program, run the following command:
 `python main.py`
 
-### 5. Using the Application
+### 6. Using the Application
 Follow the instructions on the terminal
 
 # ENJOY!
