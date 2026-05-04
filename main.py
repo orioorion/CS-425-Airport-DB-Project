@@ -3,7 +3,7 @@ import psycopg2
 from psycopg2 import OperationalError
 from dotenv import load_dotenv
 import getpass
-import PrettyTable
+from prettytable import PrettyTable
 
 def get_db_connection():
     """Create and return database connection"""
