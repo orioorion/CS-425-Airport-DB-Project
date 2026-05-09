@@ -199,6 +199,8 @@ def main():
     
     conn=get_db_connection()
     
+    conn.autocommit=True
+    
     print("Welcome to the Airline Booking Application!\n")
     stay=True
     while stay:      
@@ -227,7 +229,7 @@ Please enter your choice (1-6)""")
             l_name=input("Please enter your last name: ")
             email=input("Please enter your email: ")
             home=input("Please enter the code of the closest airport to you: ")
-            middle=input("Do you have a middle name? Enter yes or no")
+            middle=input("Do you have a middle name? Enter yes or no: ")
             if middle=="yes":
                 middle=input("Enter your middle name")
                 register_customer(conn,email,f_name,l_name,home,middle)
@@ -236,12 +238,12 @@ Please enter your choice (1-6)""")
             
         elif user_input==2:
             #Add function later
-            card_num=input("Please enter your card number")
-            f_name=input("Please enter the first name on your card")
-            l_name=input("Please enter the last name on your card")
-            cvv=getpass.getpass("Please enter your cvv")
-            exp_date=input("Please enter the expiry date (MM/YY)")
-            address_id=input("Please enter street address of the card")
+            card_num=input("Please enter your card number: ")
+            f_name=input("Please enter the first name on your card: ")
+            l_name=input("Please enter the last name on your card: ")
+            cvv=getpass.getpass("Please enter your cvv: ")
+            exp_date=input("Please enter the expiry date (MM/YY): ")
+            address_id=input("Please enter street address of the card: ")
             with conn.cursor() as cursor:
                 cursor.execute(f"SELECT addressID FROM Address WHERE street_addr='{address_id}'")
                 address_id=cursor.fetchone()[0]
@@ -252,15 +254,15 @@ Please enter your choice (1-6)""")
             #Add function later
             selection=int(input("Would you like to add or delete an address? Enter 1 for add or 2 for delete"))
             if selection==1:
-                email=input("Please enter your email")
-                street=input("Please enter your street address")
-                city=input("Please enter your city")
-                state=input("Please enter your two character state code")
-                country=input("Please enter your country")
-                zipcode=("Please enter your zipcode")
+                email=input("Please enter your email: ")
+                street=input("Please enter your street address: ")
+                city=input("Please enter your city: ")
+                state=input("Please enter your two character state code: ")
+                country=input("Please enter your country: ")
+                zipcode=("Please enter your zipcode: ")
                 add_address_and_link(conn, email, street, city, state, country, zipcode)
             else:
-                email=input("Please enter your email")
+                email=input("Please enter your email: ")
                 
                 with conn.cursor() as cursor:
                     cursor.execute(f"SELECT * FROM Address WHERE addressID IN (Select addressID FROM Lives_at WHERE email='{email}')")
@@ -280,7 +282,7 @@ Please enter your choice (1-6)""")
             # ask for departing, arriving, date, and max connections
             max_conn,date_input,departing_iata,destination_iata=None,None,None,None
             return_flight=False
-            print("Would you like to look for a return flight? Enter yes or no")
+            print("Would you like to look for a return flight? Enter yes or no: ")
             while True:
                 check=input()
                 if check=="yes":
@@ -289,8 +291,8 @@ Please enter your choice (1-6)""")
                 elif check=="no":
                     break
                 else:
-                    print("Please enter yes or no")
-            print("Please enter the maximum number of connections you want (1 for direct flights only):")
+                    print("Please enter yes or no: ")
+            print("Please enter the maximum number of connections you want (1 for direct flights only): ")
             while True:
                 try:
                     max_conn=int(input())
@@ -300,7 +302,7 @@ Please enter your choice (1-6)""")
                         print("Not an option. Please type number from 1-2")
                 except ValueError:
                     print("Please enter a number from 1-2")
-            print("Please enter the departure date of your flight MM DD YYYY separated by spaces (add leading zeros if necessary):")
+            print("Please enter the departure date of your flight MM DD YYYY separated by spaces (add leading zeros if necessary): ")
             while True:
                 try:
                     date_input=input().split()
@@ -312,7 +314,7 @@ Please enter your choice (1-6)""")
                 except ValueError:
                     print("Not an option. Please follow the format MM DD YYYY with leading zeros if necessary")
             if return_flight:
-                print("Please enter the return date of your flight MM DD YYYY separated by spaces (add leading zeros if necessary):")
+                print("Please enter the return date of your flight MM DD YYYY separated by spaces (add leading zeros if necessary): ")
                 while True:
                     try:
                         date_input=input().split()
@@ -388,8 +390,8 @@ Please enter your choice (1-6)""")
                 book=input("Would you like to book these flights? Type yes or no")
                 if book=="no":
                     break
-                email=input("Please enter your email")
-                card=int(input("Please enter your card #"))
+                email=input("Please enter your email: ")
+                card=int(input("Please enter your card #: "))
                 with conn.cursor() as cursor:
                     cursor.execute(f"INSERT INTO Booking(email,card_number) VALUES ('{email}',card)")
                     for i in keys[selection-1]:
@@ -453,8 +455,8 @@ Please enter your choice (1-6)""")
                     book=input("Would you like to book these flights? Type yes or no")
                     if book=="no":
                         break
-                    email=input("Please enter your email")
-                    card=int(input("Please enter your card #"))
+                    email=input("Please enter your email: ")
+                    card=int(input("Please enter your card #: "))
                     with conn.cursor() as cursor:
                         cursor.execute(f"INSERT INTO Booking(email,card_number) VALUES ('{email}',card)")
                         for i in keys[selection-1]:
@@ -465,7 +467,7 @@ Please enter your choice (1-6)""")
                     booked=False
                 
         elif user_input==5:
-            email=input("Please enter your email")
+            email=input("Please enter your email: ")
             deleted=False
             while not deleted:
                 with conn.cursor() as cursor:
@@ -473,7 +475,7 @@ Please enter your choice (1-6)""")
                     for row in cursor.fetchall():
                         # Displaying the results in a formatted manner
                         print(f"ID: {row[0]}")
-                selection=int(input("Please select an id to look at or 0 to exit"))
+                selection=int(input("Please select an id to look at or 0 to exit: "))
                 if selection==0:
                     deleted=True
                     break
