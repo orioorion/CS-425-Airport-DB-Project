@@ -250,7 +250,7 @@ Please enter your choice (1-6)""")
             
         elif user_input==3:
             #Add function later
-            selection=input("Would you like to add or delete an address? Enter 1 for add or 2 for delete")
+            selection=int(input("Would you like to add or delete an address? Enter 1 for add or 2 for delete"))
             if selection==1:
                 email=input("Please enter your email")
                 street=input("Please enter your street address")
